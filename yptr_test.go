@@ -77,6 +77,29 @@ func ExampleFind_jsonPointerCompat() {
 	// Output: Scalar "d" at 2:20
 }
 
+func ExampleFindAll_wildcard() {
+	src := `version: "3.8"
+
+services:
+  test:
+  web:
+    image: node
+    another: thing
+  db:
+    image: postgres
+`
+	var n yaml.Node
+	yaml.Unmarshal([]byte(src), &n)
+
+	results, _ := yptr.FindAll(&n, `/services/*/image`)
+	for _, r := range results {
+		fmt.Printf("Scalar %q at %d:%d\n", r.Value, r.Line, r.Column)
+	}
+
+	// Output: Scalar "node" at 6:12
+	// Scalar "postgres" at 9:12
+}
+
 func TestParse(t *testing.T) {
 	src := `
 spec:
