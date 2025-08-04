@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"testing"
 
-	yptr "github.com/vmware-labs/yaml-jsonpointer"
+	yptr "github.com/tristancorbellari/yaml-jsonpointer"
 	yaml "gopkg.in/yaml.v3"
 )
 
