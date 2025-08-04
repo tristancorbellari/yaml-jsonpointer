@@ -106,11 +106,15 @@ func match(root *yaml.Node, tok string, nextTok *string) ([]*yaml.Node, error) {
 		if tok == "*" {
 			var matches []*yaml.Node
 			for i := 0; i < len(c); i += 2 {
-				containsNextToken := slices.ContainsFunc(c[i+1].Content, func(n *yaml.Node) bool {
-					return n.Value == *nextTok
-				})
-				if containsNextToken {
-					matches = append(matches, c[i+1])
+				if nextTok != nil {
+					containsNextToken := slices.ContainsFunc(c[i+1].Content, func(n *yaml.Node) bool {
+						return n.Value == *nextTok
+					})
+					if containsNextToken {
+						matches = append(matches, c[i+1])
+					}
+				} else {
+					matches = append(matches, c[i])
 				}
 			}
 			return matches, nil
