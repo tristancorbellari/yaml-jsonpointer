@@ -1,3 +1,9 @@
+# Fork information
+
+This is a fork of the yaml-jsonpointer package which primarily serves one purpose: to add wildcards to expressions.
+
+Using the FindAll() function, one can now use a wildcard "*" to match all child nodes found. For an example, see the 'ExampleFindAll_wildcard' test case [here](yptr_test.go#L80).
+
 # WARNING: This repository is no longer actively maintained by VMware.
 
 VMware has made the difficult decision to stop driving this project and therefore we will no longer actively respond
