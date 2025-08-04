@@ -98,8 +98,17 @@ services:
 		fmt.Printf("Scalar %q at %d:%d\n", r.Value, r.Line, r.Column)
 	}
 
+	results, _ = yptr.FindAll(&n, `/services/*`)
+	for _, r := range results {
+		fmt.Printf("Scalar %q at %d:%d\n", r.Value, r.Line, r.Column)
+	}
+
 	// Output: Scalar "node" at 8:12
 	// Scalar "postgres" at 11:12
+	// Scalar "some-service" at 4:3
+	// Scalar "test" at 5:3
+	// Scalar "web" at 7:3
+	// Scalar "db" at 10:3
 }
 
 func TestParse(t *testing.T) {
