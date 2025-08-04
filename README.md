@@ -4,20 +4,13 @@ This is a fork of the yaml-jsonpointer package which primarily serves one purpos
 
 Using the FindAll() function, one can now use a wildcard "*" to match all child nodes found. For an example, see the 'ExampleFindAll_wildcard' test case [here](yptr_test.go#L80).
 
-# WARNING: This repository is no longer actively maintained by VMware.
-
-VMware has made the difficult decision to stop driving this project and therefore we will no longer actively respond
-to issues or pull requests. If you would like to take over maintaining this project independently from VMware, please
-let us know so we can add a link to your forked project here.
-
-Thank You.
+**It should be noted that this repository is no longer actively maintained by VMware, so tread with caution about using this package in a production environment.** I mostly just created this fork with the intention of solving a very specific problem to be used in another project.
 
 #
-#
 
-[![](https://godoc.org/github.com/github.com/vmware-labs/yaml-jsonpointer?status.svg)](https://pkg.go.dev/github.com/vmware-labs/yaml-jsonpointer?tab=doc)
-[![Go Report Card](https://goreportcard.com/badge/github.com/vmware-labs/yaml-jsonpointer)](https://goreportcard.com/report/github.com/vmware-labs/yaml-jsonpointer)
-![](https://github.com/vmware-labs/yaml-jsonpointer/workflows/CI/badge.svg)
+[![](https://godoc.org/github.com/github.com/tristancorbellari/yaml-jsonpointer?status.svg)](https://pkg.go.dev/github.com/tristancorbellari/yaml-jsonpointer?tab=doc)
+[![Go Report Card](https://goreportcard.com/badge/github.com/tristancorbellari/yaml-jsonpointer)](https://goreportcard.com/report/github.com/tristancorbellari/yaml-jsonpointer)
+![](https://github.com/tristancorbellari/yaml-jsonpointer/workflows/CI/badge.svg)
 
 
 # yaml-jsonpointer
@@ -26,7 +19,7 @@ Package yptr is a Go package with a JSONPointer implementation that can walk tho
 
 ## Documentation
 
-Read full doc on the [Go package documentation page](https://pkg.go.dev/github.com/vmware-labs/yaml-jsonpointer?tab=doc).
+Read full doc on the [Go package documentation page](https://pkg.go.dev/github.com/tristancorbellari/yaml-jsonpointer?tab=doc).
 
 ## Contributing
 
