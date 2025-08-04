@@ -94,6 +94,16 @@ func match(root *yaml.Node, tok string) ([]*yaml.Node, error) {
 			return nil, fmt.Errorf("yaml.Node invariant broken, found %d map content", l)
 		}
 
+		if tok == "*" {
+			var matches []*yaml.Node
+			for i := 0; i < len(c); i += 2 {
+				if len(c[i+1].Content) != 0 {
+					matches = append(matches, c[i+1])
+				}
+			}
+			return matches, nil
+		}
+
 		for i := 0; i < len(c); i += 2 {
 			key, value := c[i], c[i+1]
 			if tok == key.Value {
