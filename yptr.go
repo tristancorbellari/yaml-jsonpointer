@@ -5,6 +5,7 @@ package yptr
 
 import (
 	"fmt"
+	"slices"
 	"strconv"
 	"strings"
 
@@ -57,7 +58,15 @@ func Find(root *yaml.Node, ptr string) (*yaml.Node, error) {
 
 // find recursively matches a token against a yaml node.
 func find(root *yaml.Node, toks []string) ([]*yaml.Node, error) {
-	next, err := match(root, toks[0])
+	var nextTok *string
+
+	if len(toks) > 1 {
+		nextTok = &toks[1]
+	} else {
+		nextTok = nil
+	}
+
+	next, err := match(root, toks[0], nextTok)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +95,7 @@ func find(root *yaml.Node, toks []string) ([]*yaml.Node, error) {
 // If tok is ~{...}, it will parse the {...} object as a JSON object
 // and use it to filter the array using a treeSubsetPred.
 // If tok is ~[key=value] it will use keyValuePred to filter the array.
-func match(root *yaml.Node, tok string) ([]*yaml.Node, error) {
+func match(root *yaml.Node, tok string, nextTok *string) ([]*yaml.Node, error) {
 	c := root.Content
 	switch root.Kind {
 	case yaml.MappingNode:
@@ -97,7 +106,10 @@ func match(root *yaml.Node, tok string) ([]*yaml.Node, error) {
 		if tok == "*" {
 			var matches []*yaml.Node
 			for i := 0; i < len(c); i += 2 {
-				if len(c[i+1].Content) != 0 {
+				containsNextToken := slices.ContainsFunc(c[i+1].Content, func(n *yaml.Node) bool {
+					return n.Value == *nextTok
+				})
+				if containsNextToken {
 					matches = append(matches, c[i+1])
 				}
 			}
@@ -130,7 +142,7 @@ func match(root *yaml.Node, tok string) ([]*yaml.Node, error) {
 		}
 	case yaml.DocumentNode:
 		// skip document nodes.
-		return match(c[0], tok)
+		return match(c[0], tok, nextTok)
 	default:
 		return nil, fmt.Errorf("unhandled node type: %v (%v)", root.Kind, root.Tag)
 	}

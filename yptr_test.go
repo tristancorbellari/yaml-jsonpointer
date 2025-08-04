@@ -81,7 +81,9 @@ func ExampleFindAll_wildcard() {
 	src := `version: "3.8"
 
 services:
+  some-service:
   test:
+    volume: some_volume # this is a comment
   web:
     image: node
     another: thing
@@ -96,8 +98,8 @@ services:
 		fmt.Printf("Scalar %q at %d:%d\n", r.Value, r.Line, r.Column)
 	}
 
-	// Output: Scalar "node" at 6:12
-	// Scalar "postgres" at 9:12
+	// Output: Scalar "node" at 8:12
+	// Scalar "postgres" at 11:12
 }
 
 func TestParse(t *testing.T) {
